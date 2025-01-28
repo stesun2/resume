@@ -1,0 +1,36 @@
+name: Resume Workflow
+
+on:
+  schedule:
+    - cron: '0 0 * * *'        # Every day at midnight UTC
+    - cron: '0 0 * * 5'        # Every Friday at midnight UTC
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  log_operations:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Create a file named log.txt and add a message
+      run: |
+        echo "This is a log message." > log.txt
+
+    - name: Print current working directory
+      run: |
+        pwd
+
+    - name: Print contents of log.txt
+      run: |
+        cat log.txt
+
+    - name: Echo a custom message
+      run: |
+        echo "This is a custom message!"
